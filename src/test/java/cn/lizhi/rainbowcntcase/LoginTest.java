@@ -41,7 +41,7 @@ public class LoginTest extends TestBase {
     @Test(dependsOnMethods = "LoginTest")
     @Description("获取所有生命周期事件")
     public void EventAllTest() {
-        HttpRequest request = setHeader();
+        request = setHeader();
         HttpRequest req = request.method(HttpMethod.GET).host(RainbowcnCrm.Base_URL_SIT).path(RainbowcnCrm.Rainbowcn_EventAll_URL);
         HttpResponse response = req.send();
         String body = response.body();
@@ -79,9 +79,9 @@ public class LoginTest extends TestBase {
 
     }
 
-    @Test
+    @Test(dependsOnMethods = "LoginTest")
     public void audit(){
-        HttpRequest request = setHeader();
+        request = setHeader();
         String parm="{\n" +
                 "\t\"id\": \"27\",\n" +
                 "\t\"result\": 0,\n" +
@@ -89,5 +89,11 @@ public class LoginTest extends TestBase {
                 "}";
         HttpRequest req = request.method(HttpMethod.POST).host(RainbowcnCrm.Base_URL_SIT).path(RainbowcnCrm.Audit_URL)
                 .contentType("application/json; charset=utf-8").data(parm);
+        HttpResponse response= req.send();
+        String body = response.body();
+        JSONObject jsonResult = JSONObject.parseObject(body);
+        String message=jsonResult.getString("message");
+        log.info("响应体："+body+"====>"+message);
+        Assert.assertEquals(ResultEnum.SUCCESS.getMsg(), message);
     }
 }

@@ -33,7 +33,7 @@ public class TestBase {
 
     public HttpRequest setHeader() {
         HttpRequest req = new HttpRequest().header("x-http-channel", "app")
-                .header("x-http-devicetoken", "13065ffa4e8d8011841")
+                .header("x-http-devicetoken", token)
                 .header("x-http-devicetypen", "android")
                 .header("x-http-version", " 1.1.5.8")
                 .header("x-http-screenheight", "1920")

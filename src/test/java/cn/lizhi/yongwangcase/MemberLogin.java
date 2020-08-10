@@ -3,6 +3,7 @@ package cn.lizhi.yongwangcase;
 import cn.lizhi.common.ResultEnum;
 import cn.lizhi.constans.YongWangCrm;
 import cn.lizhi.http.HttpMethod;
+import cn.lizhi.http.HttpRequest;
 import cn.lizhi.http.HttpResponse;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -48,13 +49,14 @@ public class MemberLogin extends TestBase {
         JSONObject jsonResult = JSONObject.parseObject(reponseResult);
         String message = jsonResult.getString("message");
         token = jsonResult.getJSONObject("data").getString("token");
+        super.setToken(token);
         if (token == null) {
             log.info("登录失败");
         }
         log.info("请求头状态码" + reqs.statusLine() + "=======" + "响应体" + jsonResult + "======" + "message" + message + "====" + "token" + token);
 
         try {
-            Assert.assertEquals(ResultEnum.SUCCESS.getMsg(), message);
+            Assert.assertEquals(ResultEnum.SUCCESS_OPERATION.getMsg(), message);
         } catch (Exception e) {
             e.printStackTrace();
             log.info("Error_Message" + e.getMessage());
@@ -63,12 +65,13 @@ public class MemberLogin extends TestBase {
 
     }
 
-    @Test(dataProvider = "MyInfoDatas")
+    @Test(dataProvider = "MyInfoDatas",dependsOnMethods="testLogin")
     public void TestMyInfo(String storeCode, String code) {
         Map<String, Object> map = new HashMap<>();
         map.put("storeCode", storeCode);
         map.put("code", code);
         String parm = JSON.toJSONString(map);
+        request = setHeader();
         HttpResponse reqs = request.method(HttpMethod.POST).host(YongWangCrm.Base_URL_DIV)
                 .path(YongWangCrm.MyInfo_URL)
                 .contentType("application/json").data(parm).send();
@@ -91,8 +94,8 @@ public class MemberLogin extends TestBase {
     @DataProvider
     public Object[][] loginDatas() {
         Object[][] datas = {
-                {"18566582390", "chen980985672"},
-                {"17688732017", "chen980985672"}
+                {"18566582390", "chen980985672"}
+
         };
         return datas;
     }

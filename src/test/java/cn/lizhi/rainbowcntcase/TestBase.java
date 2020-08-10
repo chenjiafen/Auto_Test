@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  * @Version 1.0
  */
 public class TestBase {
-    HttpRequest request = setHeader();
+    HttpRequest request;
     Logger log = Logger.getLogger(TestBase.class.getName());
     private String token;
 
@@ -23,6 +23,9 @@ public class TestBase {
 
     public void setToken(String token) {
         this.token = token;
+    }
+    public TestBase() {
+        this.request = setHeader();
     }
 
     public HttpRequest setHeader() {

@@ -7,6 +7,7 @@ package cn.lizhi.common;
  */
 public enum  ResultEnum {
     SUCCESS(0, "操作成功！"),
+    SUCCESS_OPERATION(200, "执行成功！"),
     SUCCESS_MESSAGE(200, "验证码已发送"),
     FAIL(-99, "失败"),
     UNKONW_ERROR(-1, "未知错误"),

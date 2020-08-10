@@ -3,7 +3,6 @@
 <suite name="suite">
     <test verbose="1" name="天虹项目">
         <classes>
-            <!--<class name="cn.crazyapi.tianhongtestcase.yongwangcase.MemberLogin"/>-->
             <class name="cn.lizhi.rainbowcntcase.LoginTest"/>
         </classes>
     </test>
