@@ -8,7 +8,7 @@
     </test>
     <test verbose="1" name="永旺项目">
         <classes>
-            <class name="cn.lizhi.rainbowcntcase.LoginTest"/>
+            <class name="cn.lizhi.yongwangcase.MemberLogin"/>
         </classes>
     </test>
 </suite>
