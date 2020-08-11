@@ -5,6 +5,7 @@ import cn.lizhi.utils.ExcelUtil;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 import java.util.logging.Logger;
@@ -46,19 +47,32 @@ public class TestBase {
         return req;
     }
 
+//    @DataProvider
+//    public Object[][] getData(Method method) throws Exception {
+//        String fileName = this.getClass().getClassLoader().getResource("tianhong,xlsx").getPath();
+//        ExcelUtil excel = new ExcelUtil(fileName);
+//        Object[][] result = null;
+//        if (method.getName().equals("test001_login")) {
+//            result = excel.getTestData("login");
+//        } else if (method.getName().equals("test004_search")) {
+//            result = excel.getTestData("search");
+//        } else {
+//            result = new Object[][]{new Object[]{3}};
+//        }
+//        return result;
+//    }
+
+    /**
+     * exel数据驱动
+     * @param method
+     * @return
+     * @throws Exception
+     */
     @DataProvider
-    public Object[][] getData(Method method) throws Exception {
-        String fileName = this.getClass().getClassLoader().getResource("tianhong,xlsx").getPath();
-        ExcelUtil excel = new ExcelUtil(fileName);
-        Object[][] result = null;
-        if (method.getName().equals("test001_login")) {
-            result = excel.getTestData("login");
-        } else if (method.getName().equals("test004_search")) {
-            result = excel.getTestData("search");
-        } else {
-            result = new Object[][]{new Object[]{3}};
-        }
-        return result;
+    public Object[][] loginDD(Method method) throws Exception {
+        ExcelUtil excel = new ExcelUtil("//Users//Work//test_api//testapi//src//main//resources//tianhong.xlsx");
+        Object[][] obj = excel.getTestData("login");
+        return obj;
     }
 
     @BeforeClass
@@ -66,4 +80,21 @@ public class TestBase {
         String fileName = this.getClass().getClassLoader().getResource("log4j.xml").getPath();
         DOMConfigurator.configure(fileName);
     }
+//    /**
+//     * exel驱动数据
+//     * @param casenum
+//     * @param casename
+//     * @param username
+//     * @param pwd
+//     * @param assertValue
+//     * @param fileName
+//     * @throws Exception
+//     */
+//    @Test(dataProvider = "loginDD")
+//    public void loginDataTest(String casenum ,String casename,String username,String pwd,String assertValue,String fileName) throws Exception {
+//        ExcelUtil excel = new ExcelUtil("/Users/Work/testapi01/src/main/resources/tianhong.xlsx");
+//        System.out.println("casenum"+casenum+"casename"+casename+"username"+username+"pass"+pwd+"assertValue"+assertValue+"fileName"+fileName);
+////        excel.setCellData(Integer.valueOf(casenum),7,"测试失败","login",false);
+//    }
+
 }

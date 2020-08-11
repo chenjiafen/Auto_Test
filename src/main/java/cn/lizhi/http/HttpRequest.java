@@ -112,8 +112,6 @@ public class HttpRequest {
 
         return req;
     }
-
-
     /**
      * 请求的方式get
      * @param destination

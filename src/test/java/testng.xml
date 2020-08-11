@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="suite">
+    <listeners>
+        <!--失败重跑-->
+        <listener class-name="cn.lizhi.lister.FailedRetryListener"/>
+    </listeners>
     <test verbose="1" name="天虹项目">
         <classes>
             <class name="cn.lizhi.rainbowcntcase.LoginTest"/>

@@ -79,7 +79,8 @@ public class MemberLogin extends TestBase {
         JSONObject jsonResult = JSONObject.parseObject(reponseResult);
         String message = jsonResult.getString("message");
         log.info("jsonResult===>>" + jsonResult);
-        Assert.assertEquals(ResultEnum.SUCCESS.getMsg(), message);
+        Assert.assertEquals(message, ResultEnum.SUCCESS.getMsg());
+
 
     }
 
