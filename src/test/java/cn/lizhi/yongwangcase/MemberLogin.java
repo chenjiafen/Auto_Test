@@ -3,8 +3,8 @@ package cn.lizhi.yongwangcase;
 import cn.lizhi.common.ResultEnum;
 import cn.lizhi.constans.YongWangCrm;
 import cn.lizhi.http.HttpMethod;
-import cn.lizhi.http.HttpRequest;
 import cn.lizhi.http.HttpResponse;
+import cn.lizhi.lister.FailedRetry;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.qameta.allure.Description;
@@ -23,7 +23,7 @@ import java.util.Map;
 public class MemberLogin extends TestBase {
     String token;
 
-    @Test(dataProvider = "loginDatas")
+    @Test(dataProvider = "loginDatas",retryAnalyzer = FailedRetry.class)
     @Description("cmr登录接口测试不同账号")
 //    @Step("登录")
     public void testLogin(String username, String password) {
@@ -65,7 +65,8 @@ public class MemberLogin extends TestBase {
 
     }
 
-    @Test(dataProvider = "MyInfoDatas",dependsOnMethods="testLogin")
+
+    @Test(dataProvider = "MyInfoDatas",dependsOnMethods="testLogin",retryAnalyzer = FailedRetry.class)
     public void TestMyInfo(String storeCode, String code) {
         Map<String, Object> map = new HashMap<>();
         map.put("storeCode", storeCode);
