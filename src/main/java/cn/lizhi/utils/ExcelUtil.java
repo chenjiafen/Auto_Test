@@ -165,11 +165,13 @@ public class ExcelUtil {
             //返回的是倒数第二列
             String fields[] = new String[row.getLastCellNum() - 2];
             //当前所在的行倒数第二例为y，读取当前行的数据
-            if (row.getCell(row.getLastCellNum() - 2).getStringCellValue().equalsIgnoreCase("y") && row.getCell(row.getLastCellNum() - 2) != null ) {
+            if (row.getCell(row.getLastCellNum() - 2).getStringCellValue().equalsIgnoreCase("y") && row.getCell(row.getLastCellNum() - 2) != null) {
                 //不读去倒数2列
                 for (int j = 0; j < row.getLastCellNum() - 2; j++) {
+                    //判断类型是不是string
                     if (row.getCell(j).getCellType() == XSSFCell.CELL_TYPE_STRING) {
                         fields[j] = row.getCell(j).getStringCellValue();
+                        //数值类型
                     } else if (row.getCell(j).getCellType() == XSSFCell.CELL_TYPE_NUMERIC) {
                         DecimalFormat df = new DecimalFormat("0");
                         fields[j] = df.format(row.getCell(j).getNumericCellValue());
@@ -200,10 +202,10 @@ public class ExcelUtil {
     public static void main(String[] args) {
 //
         try {
-            ExcelUtil excel = new ExcelUtil("//Users//Work//test_api//testapi//src//main//resources//tianhong.xlsx");
+            ExcelUtil excel = new ExcelUtil("/Users/Work/testapi01/src/main/resources/tianhong.xlsx");
 
 //            excel.setCellData(2, eu.getLastColumnNum(),"测试执行失败");
-            Object[][] ob = excel.getTestData("login");
+            Object[][] ob = excel.getTestData("login-options");
             for (int i = 0; i < ob.length; i++) {
                 Object[] obl = ob[i];
                 System.out.println("========");

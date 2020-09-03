@@ -192,7 +192,6 @@ public class HttpRequest {
         this.method = method;
         return this;
     }
-
     /**
      *protocol
      * @return

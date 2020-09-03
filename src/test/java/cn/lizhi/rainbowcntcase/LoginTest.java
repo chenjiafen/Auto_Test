@@ -19,6 +19,7 @@ import java.util.Map;
  * @Version 1.0
  */
 public class LoginTest extends TestBase {
+
     @Test(dataProvider = "UserData")
     public void LoginTest(String name, String pass) {
         Map<String, Object> map = new HashMap<>();
@@ -34,7 +35,7 @@ public class LoginTest extends TestBase {
         String token = jsonResult.getJSONObject("data").getString("token");
         super.setToken(token);
         log.info("username===>>" + username + "======>>" + "token:" + token + "======>>" + "\n\t" + "jsonResult===>>" + jsonResult);
-        Assert.assertEquals(map.get("account"), username);
+        Assert.assertEquals(username,map.get("account"));
 
     }
 
@@ -45,9 +46,10 @@ public class LoginTest extends TestBase {
         HttpRequest req = request.method(HttpMethod.GET).host(RainbowcnCrm.Base_URL_SIT).path(RainbowcnCrm.Rainbowcn_EventAll_URL);
         HttpResponse response = req.send();
         String body = response.body();
+        System.out.println("body==============="+body);
         String message = JSONObject.parseObject(body).getString("message");
         log.info("body:" + body + "======>" + "message" + message);
-        Assert.assertEquals(ResultEnum.SUCCESS.getMsg(), message);
+        Assert.assertEquals(message,ResultEnum.SUCCESS.getMsg());
 
     }
 

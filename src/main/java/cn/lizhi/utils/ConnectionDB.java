@@ -64,13 +64,18 @@ public class ConnectionDB {
 
     static {
         try {
+//            String fileName = ConnectionDB.class.getClassLoader().getResource("mysql.properties").getPath();
             // 加载数据库驱动程序
             Properties properties=new Properties();
-            properties.load(new FileReader(new File("resources/mysql.properties")));
+            properties.load(new FileReader(new File("/Users/Work/testapi01/src/main/resources/mysql.properties")));
             DRIVER=properties.getProperty("mysql.driver");
+            System.out.println("mysql.driver======"+DRIVER);
             URLSTR=properties.getProperty("mysql.url");
-            USERNAME=properties.getProperty("mysql.url");
+            System.out.println("mysql.url======"+URLSTR);
+            USERNAME=properties.getProperty("mysql.username");
+            System.out.println("mysql.username======"+USERNAME);
             PASSWORD=properties.getProperty("mysql.password");
+            System.out.println("mysql.password======"+PASSWORD);
             Class.forName(DRIVER);
         } catch (ClassNotFoundException e) {
             System.out.println("加载驱动错误");
@@ -93,6 +98,7 @@ public class ConnectionDB {
             // 获取连接
             connnection = DriverManager.getConnection(URLSTR, USERNAME,
                     PASSWORD);
+            System.out.println("connnection====="+connnection);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -335,13 +341,15 @@ public class ConnectionDB {
 
     public static void main(String[] args) throws Exception {
         ConnectionDB db=new ConnectionDB();
-        ResultSet reslut=db.executeQueryRS("select * from userinfo where username = ? ", new Object[]{"tom"});
+//        db.getConnection();
+        ResultSet reslut=db.executeQueryRS("select * from member_life_cycle_event WHERE event_name=?", new Object[]{"百货流失挽留"});
         while(reslut.next()){
-            int uid = reslut.getInt(1);
-            String username = reslut.getString(2);
-            int acountid = reslut.getInt(3);
+            int id = reslut.getInt(1);
+            String tenant_id = reslut.getString(2);
+            String event_name = reslut.getString(4);
 
-            System.out.println(uid + "\t" + username + "\t" + acountid );
+            System.out.println(id + "\t" + tenant_id + "\t" + event_name );
+
         }
         reslut.close();
         db.closeAll();

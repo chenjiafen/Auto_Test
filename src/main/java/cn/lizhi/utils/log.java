@@ -8,14 +8,14 @@ import org.apache.log4j.Logger;
 public class log {
     private static Logger Log = Logger.getLogger(log.class);
 
-    public static void startTestCase(String sTestCaseName) {
+    public static void startTestCase() {
 
         Log.info("---------------------------------------------------");
-        Log.info("----------   " + sTestCaseName + "    ----------------");
+        Log.info("---------- " + "测试用例执行开始" + "----------------");
     }
 
-    public static void endTestCase(String sTestCaseName) {
-        Log.info("----------   " + "测试用例执行结束" + "    ----------------");
+    public static void endTestCase() {
+        Log.info("----------" + "测试用例执行结束" + "----------------");
         Log.info("----------------------------------------------------");
     }
 

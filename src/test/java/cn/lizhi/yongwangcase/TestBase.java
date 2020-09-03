@@ -80,21 +80,21 @@ public class TestBase {
         String fileName = this.getClass().getClassLoader().getResource("log4j.xml").getPath();
         DOMConfigurator.configure(fileName);
     }
-//    /**
-//     * exel驱动数据
-//     * @param casenum
-//     * @param casename
-//     * @param username
-//     * @param pwd
-//     * @param assertValue
-//     * @param fileName
-//     * @throws Exception
-//     */
-//    @Test(dataProvider = "loginDD")
-//    public void loginDataTest(String casenum ,String casename,String username,String pwd,String assertValue,String fileName) throws Exception {
-//        ExcelUtil excel = new ExcelUtil("/Users/Work/testapi01/src/main/resources/tianhong.xlsx");
-//        System.out.println("casenum"+casenum+"casename"+casename+"username"+username+"pass"+pwd+"assertValue"+assertValue+"fileName"+fileName);
-////        excel.setCellData(Integer.valueOf(casenum),7,"测试失败","login",false);
-//    }
+    /**
+     * exel驱动数据
+     * @param casenum
+     * @param casename
+     * @param username
+     * @param pwd
+     * @param assertValue
+     * @param fileName
+     * @throws Exception
+     */
+    @Test(dataProvider = "loginDD")
+    public void loginDataTest(String casenum ,String casename,String username,String pwd,String assertValue,String fileName) throws Exception {
+        ExcelUtil excel = new ExcelUtil("/Users/Work/testapi/src/main/resources/tianhong.xlsx");
+        System.out.println("casenum"+casenum+"casename"+casename+"username"+username+"pass"+pwd+"assertValue"+assertValue+"fileName"+fileName);
+//        excel.setCellData(Integer.valueOf(casenum),7,"测试失败","login",false);
+    }
 
 }

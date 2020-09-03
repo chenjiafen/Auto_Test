@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  * @Author chenjiafneg
  * @Date 2020/8/5 18:51
@@ -23,7 +24,7 @@ import java.util.Map;
 public class MemberLogin extends TestBase {
     String token;
 
-    @Test(dataProvider = "loginDatas",retryAnalyzer = FailedRetry.class)
+    @Test(dataProvider = "loginDatas", retryAnalyzer = FailedRetry.class)
     @Description("cmr登录接口测试不同账号")
 //    @Step("登录")
     public void testLogin(String username, String password) {
@@ -47,6 +48,7 @@ public class MemberLogin extends TestBase {
         log.info("请求头状态码" + reqs.statusLine());
         String reponseResult = reqs.body();
         JSONObject jsonResult = JSONObject.parseObject(reponseResult);
+        log.info(jsonResult + "响应结果");
         String message = jsonResult.getString("message");
         token = jsonResult.getJSONObject("data").getString("token");
         super.setToken(token);
@@ -61,12 +63,10 @@ public class MemberLogin extends TestBase {
             e.printStackTrace();
             log.info("Error_Message" + e.getMessage());
         }
-
-
     }
 
 
-    @Test(dataProvider = "MyInfoDatas",dependsOnMethods="testLogin",retryAnalyzer = FailedRetry.class)
+    @Test(dataProvider = "MyInfoDatas", dependsOnMethods = "testLogin", retryAnalyzer = FailedRetry.class)
     public void TestMyInfo(String storeCode, String code) {
         Map<String, Object> map = new HashMap<>();
         map.put("storeCode", storeCode);
@@ -96,7 +96,7 @@ public class MemberLogin extends TestBase {
     @DataProvider
     public Object[][] loginDatas() {
         Object[][] datas = {
-                {"18566582390", "chen980985672"}
+                {"18566582390", "chen9809856721"}
 
         };
         return datas;
